@@ -2,13 +2,23 @@ package com.rasmus.dicegame;
 
 public class Player {
 
-    public String name;
-    int user;
-    int die;
+    private String name;
+    private int score;
 
-    public Player(String name, int user, int die) {
+    public Player(String name) {
         this.name = name;
-        this.user = user;
-        this.die = die;
+        this.score = 0;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore (int score) {
+        this.score = score;
     }
 }

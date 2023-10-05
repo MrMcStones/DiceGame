@@ -27,27 +27,57 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        Player players = new Player("", 0, 0);
-        Player player1 = new Player("", 0,0);
-        Player player2 = new Player("", 0,0);
+        Player player1 = new Player("");
+        Player player2 = new Player("");
+        Player player3 = new Player("");
+        Player player4 = new Player("");
+        Player player5 = new Player("");
 
-        System.out.println("Enter how many players will compete:");
-        players.user = sc.nextInt();
-        System.out.println("Enter how many dice you want to throw every round:");
-        players.die = sc.nextInt();
+        int players;
 
-        System.out.println("Player 1 name:");
-        player1.name = sc.next();
-        System.out.println("Player 2 name:");
-        player2.name = sc.next();
+        while (true) {
+            System.out.println("Choose how many players there are. There can only be between" +
+                    " 2-5.");
+            players = sc.nextInt();
+
+            if (players >= 2 && players <= 5) {
+                break;
+            } else {
+                System.out.println("There can only be between 2-5 players. " +
+                        "Please enter a valid option.");
+            }
+        }
+
+        Player[] playersArray = new Player[players];
+
+        for (int i = 0; i < players; i++) {
+            System.out.println("Choose your names:" + (i + 1) + ": ");
+            String playerName = sc.next();
+            playersArray[i] = new Player(playerName);
+        }
+
+        int dice;
+        while (true) {
+            System.out.println("How many dice do you want to play with? Must be between 1-4.");
+            dice = sc.nextInt();
+
+            if (dice >= 1 && dice <=4) {
+                break;
+            } else {
+                System.out.println("You can only choose between 1-4 dice. " +
+                        "Please enter a valid option.");
+            }
+        }
+
+        }
     }
-}
 
 // Checklist
 /* Checklist
 Scanner DONE - FIX into separate class
-Player clas DONE - constructor DONE
+Player class DONE - constructor DONE  - FIX Fill out later
+Dice class DONE - FIX Fill out later
 Ask how many players DONE
 Ask how many die DONE
-FIX if or switch case for answer regarding players and die
+DONE ask for player names - FIX finnish and look if best way
  */
