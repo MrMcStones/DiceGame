@@ -20,6 +20,7 @@ Number can only be 'Integer'
 Three relevant unit testings
  */
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -27,6 +28,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        Random random = new Random();
 
         System.out.println("Welcome to my DiceGame. You can play this game with 2-5 players " +
                 "and you can choose to use 1-4 dice during the game.\n" +
@@ -68,10 +70,33 @@ public class Main {
             }
         }
 
-        Player player1 = playersArray[0];
-        String playerName = player1.getName();
+        int diceSize;
+        while (true) {
+            System.out.println("Choose which sided dice you want to use. The options are: 6, 12 or 20");
+            diceSize = sc.nextInt();
 
-        System.out.println(playerName + ", It's your turn to roll the dice.");
+            if (diceSize == 6 || diceSize == 12 || diceSize == 20) {
+                break;
+            } else {
+                System.out.println("Please enter a valid option");
+            }
+        }
+
+        boolean isPlaying = true;
+
+        while (true) {
+            Player player1 = playersArray[0];
+            String playerName = player1.getName();
+
+            System.out.println(playerName + ", It's your turn to roll the dice. " +
+                    "Press 'Enter'");
+
+            sc.nextLine();
+            sc.nextLine();
+
+            int diceResult = random.nextInt(6) + 1;
+            System.out.println(playerName + " rolled: " + diceResult);
+        }
 
         }
     }
