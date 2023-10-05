@@ -2,6 +2,11 @@ package com.rasmus.dicegame;
 
 public class Player {
 
+    private static Player[] playersArray;
+
+    private static void setPlayersArray(Player[] players) {
+        playersArray = players;
+    }
     private String name;
     private int score;
 
