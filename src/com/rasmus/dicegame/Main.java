@@ -19,9 +19,20 @@ Number can only be 'Integer'
 Three relevant unit testings
  */
 
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
 
+        Scanner sc = new Scanner(System.in);
+        Player player1 = new Player();
+
+        System.out.println("Enter how many players will compete");
+        System.out.println("Enter how many dice you want to throw every round");
+
+
+        System.out.println("Player 1 name:");
+        System.out.println("Player 2 name:");
     }
 }
