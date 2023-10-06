@@ -1,42 +1,19 @@
 package com.rasmus.dicegame;
 
-// TODO
-/* TODO
-Amount of players - VG
-Amount of dice
-Player Name
-
-RULES
-Every player gets to throw one or more dice per turn
-The player with the highest score wins (minimum 2 players)
-
-VG
-
-Two winners, handle that
-Scanner in its own class
-Make sure the right answer through input
-Name can only be 'String'
-Number can only be 'Integer'
-Three relevant unit testings
- */
-
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Main {
+public class Test {
 
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
         Random random = new Random();
-        HashMap<String, Integer> playerScores = new HashMap<>();
         int numDiceRolls = 3;
 
         System.out.println("Welcome to my DiceGame. You can play this game with 2-5 players " +
                 "and you can choose to use 1-4 dice during the game.\n" +
-                "The game is simple - you will take turns rolling your dice and whoever get the highest score wins.\n" +
+                "The game is simple - you will take turns rolling your dice and whoever gets the highest score wins.\n" +
                 "Please press 'enter' to continue.");
         sc.nextLine();
 
@@ -93,8 +70,6 @@ public class Main {
         boolean isPlaying = true;
         int currentPlayerIndex = 0;
 
-        ArrayList<Integer> diceRollResult = new ArrayList<>();
-
         while (isPlaying && rollsCount < totalRolls) {
             Player currentPlayer = playersArray[currentPlayerIndex];
             String playerName = currentPlayer.getName();
@@ -104,76 +79,25 @@ public class Main {
             sc.nextLine();
 
             int diceResult = random.nextInt(diceSize) + 1;
-            int currentScore = playerScores.getOrDefault(playerName, 0);
-            currentScore += diceResult;
-            playerScores.put(playerName, currentScore);
-
             System.out.println(playerName + " rolled: " + diceResult);
-            diceRollResult.add(diceResult);
-            System.out.println(playerName + " total points: " + currentScore);
-            System.out.println("Press 'Enter' to proceed.");
-
-            if (rollsCount < totalRolls - 1) {
-                sc.nextLine();
-            }
 
             rollsCount++;
 
-            currentPlayerIndex++;
-
-            if (currentPlayerIndex >= playersArray.length) {
-                currentPlayerIndex = 0;
-            }
-
             if (rollsCount == totalRolls) {
                 isPlaying = false;
+            } else {
+                System.out.println("Next player press 'Enter' to roll.");
+                sc.nextLine();
+                currentPlayerIndex++;
+
+                if (currentPlayerIndex >= playersArray.length) {
+                    currentPlayerIndex = 0;
+                }
             }
         }
 
-        String winner = null;
-        int highestScore = Integer.MIN_VALUE;
-
-        for (String playerName : playerScores.keySet()) {
-            int playerScore = playerScores.get(playerName);
-            if (playerScore > highestScore) {
-                winner = playerName;
-                highestScore = playerScore;
-            }
-        }
-
-        sc.nextLine();
-
-        if (winner != null) {
-            System.out.println("The player named: " + winner +
-                    " won with a total of "+ highestScore + " points!");
-        } else {
-            System.out.println("It's a draw!");
-        }
+        System.out.println("Det var det.");
 
     }
-
 }
 
-// Checklist
-/*
-DONE
-Make Scanner
-Make player class - constructor
-Make dice class
-Ask how many players
-Ask how many dice
-Ask for player names DONE
-Make players being able to roll
-Make players take turns rolling
-Save score of rolls
-Tabulate players rolls for total scoring
-Show winner
-Make 'else' for a draw scenario
-
-FIX
-Scanner into separate class
-Comment code
-Make use of classes (OOP) - Scanner, players, dice etc
-UnitTesting
-Exception handling - Try Catch
- */
