@@ -1,12 +1,6 @@
 package com.rasmus.dicegame;
 
 public class Player {
-
-    private static Player[] playersArray;
-
-    private static void setPlayersArray(Player[] players) {
-        playersArray = players;
-    }
     private String name;
     private int score;
 
@@ -23,7 +17,19 @@ public class Player {
         return score;
     }
 
+    public void addToScore(int points) {
+        score += points;
+    }
+
+    /* private static Player[] playersArray;
+
+    private static void setPlayersArray(Player[] players) {
+        playersArray = players;
+    }
+
     public void setScore (int score) {
         this.score = score;
     }
+
+     */
 }

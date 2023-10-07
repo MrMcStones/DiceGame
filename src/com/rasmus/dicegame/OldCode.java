@@ -1,19 +1,16 @@
 package com.rasmus.dicegame;
 
-import java.util.Random;
-import java.util.Scanner;
+public class OldCode {
 
-public class Test {
-
-    public static void main(String[] args) {
-
+            /* OLD SETUP BEFORE CHANGING CLASSES STRUCTURE
         Scanner sc = new Scanner(System.in);
         Random random = new Random();
+        HashMap<String, Integer> playerScores = new HashMap<>();
         int numDiceRolls = 3;
 
         System.out.println("Welcome to my DiceGame. You can play this game with 2-5 players " +
                 "and you can choose to use 1-4 dice during the game.\n" +
-                "The game is simple - you will take turns rolling your dice and whoever gets the highest score wins.\n" +
+                "The game is simple - you will take turns rolling your dice and whoever get the highest score wins.\n" +
                 "Please press 'enter' to continue.");
         sc.nextLine();
 
@@ -70,6 +67,8 @@ public class Test {
         boolean isPlaying = true;
         int currentPlayerIndex = 0;
 
+        ArrayList<Integer> diceRollResult = new ArrayList<>();
+
         while (isPlaying && rollsCount < totalRolls) {
             Player currentPlayer = playersArray[currentPlayerIndex];
             String playerName = currentPlayer.getName();
@@ -79,25 +78,53 @@ public class Test {
             sc.nextLine();
 
             int diceResult = random.nextInt(diceSize) + 1;
+            int currentScore = playerScores.getOrDefault(playerName, 0);
+            currentScore += diceResult;
+            playerScores.put(playerName, currentScore);
+
             System.out.println(playerName + " rolled: " + diceResult);
+            diceRollResult.add(diceResult);
+            System.out.println(playerName + " total points: " + currentScore);
+            System.out.println("Press 'Enter' to proceed.");
+
+            if (rollsCount < totalRolls - 1) {
+                sc.nextLine();
+            }
 
             rollsCount++;
 
+            currentPlayerIndex++;
+
+            if (currentPlayerIndex >= playersArray.length) {
+                currentPlayerIndex = 0;
+            }
+
             if (rollsCount == totalRolls) {
                 isPlaying = false;
-            } else {
-                System.out.println("Next player press 'Enter' to roll.");
-                sc.nextLine();
-                currentPlayerIndex++;
-
-                if (currentPlayerIndex >= playersArray.length) {
-                    currentPlayerIndex = 0;
-                }
             }
         }
 
-        System.out.println("Det var det.");
+        String winner = null;
+        int highestScore = Integer.MIN_VALUE;
 
-    }
+        for (String playerName : playerScores.keySet()) {
+            int playerScore = playerScores.get(playerName);
+            if (playerScore > highestScore) {
+                winner = playerName;
+                highestScore = playerScore;
+            }
+        }
+
+        sc.nextLine();
+
+        if (winner != null) {
+            System.out.println("The player named: '" + winner +
+                    "' won with a total of "+ highestScore + " points!");
+        } else {
+            System.out.println("It's a draw!");
+        }
+
+        sc.close();
+
+         */
 }
-
