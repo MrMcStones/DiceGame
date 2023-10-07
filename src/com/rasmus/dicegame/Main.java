@@ -22,7 +22,6 @@ Three relevant unit testings
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -30,7 +29,6 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        Random random = new Random();
         HashMap<String, Integer> playerScores = new HashMap<>();
         int numDiceRolls = 3;
 
@@ -91,13 +89,14 @@ public class Main {
         sc.nextLine();
 
         int totalRolls = numDiceRolls * playerCount;
-        int rollsCount = 0;
+        int rollCount = 0;
         boolean isPlaying = true;
         int currentPlayerIndex = 0;
 
         ArrayList<Integer> diceRollResult = new ArrayList<>();
+        Dice gameDice = new Dice(diceSize);
 
-        while (isPlaying && rollsCount < totalRolls) {
+        while (isPlaying && rollCount < totalRolls) {
             Player currentPlayer = players.get(currentPlayerIndex);
             String playerName = currentPlayer.getName();
 
@@ -105,7 +104,7 @@ public class Main {
                     "Press 'Enter'");
             sc.nextLine();
 
-            int diceResult = random.nextInt(diceSize) + 1;
+            int diceResult = gameDice.roll();
             int currentScore = playerScores.getOrDefault(playerName, 0);
             currentScore += diceResult;
             playerScores.put(playerName, currentScore);
@@ -115,11 +114,11 @@ public class Main {
             System.out.println(playerName + " total points: " + currentScore);
             System.out.println("Press 'Enter' to proceed.");
 
-            if (rollsCount < totalRolls - 1) {
+            if (rollCount < totalRolls - 1) {
                 sc.nextLine();
             }
 
-            rollsCount++;
+            rollCount++;
 
             currentPlayerIndex++;
 
@@ -127,7 +126,7 @@ public class Main {
                 currentPlayerIndex = 0;
             }
 
-            if (rollsCount == totalRolls) {
+            if (rollCount == totalRolls) {
                 isPlaying = false;
             }
         }

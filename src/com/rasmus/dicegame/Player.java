@@ -21,15 +21,4 @@ public class Player {
         score += points;
     }
 
-    /* private static Player[] playersArray;
-
-    private static void setPlayersArray(Player[] players) {
-        playersArray = players;
-    }
-
-    public void setScore (int score) {
-        this.score = score;
-    }
-
-     */
 }

@@ -1,9 +1,17 @@
 package com.rasmus.dicegame;
 
-public class Dice {
-    int dice;
+import java.util.Random;
 
-    public Dice(int dice) {
-        this.dice = dice;
+public class Dice {
+    private int sides;
+    private Random random;
+
+    public Dice(int sides) {
+        this.sides = sides;
+        this.random = new Random();
+    }
+
+    public int roll() {
+        return random.nextInt(sides) + 1;
     }
 }
