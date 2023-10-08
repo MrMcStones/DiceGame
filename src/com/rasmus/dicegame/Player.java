@@ -4,6 +4,7 @@ public class Player {
     private String name;
     private int score;
 
+    // Create Player object with name and start score of 0
     public Player(String name) {
         this.name = name;
         this.score = 0;
@@ -21,6 +22,7 @@ public class Player {
         return score;
     }
 
+    // Adds point to player score
     public void addToScore(int points) {
         score += points;
     }

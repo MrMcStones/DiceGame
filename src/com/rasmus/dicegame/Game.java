@@ -6,11 +6,14 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
-    private static String determineWinner;
+    // Store players
     private ArrayList<Player> players;
+    // Store player scores
     private HashMap<String, Integer> playerScores;
+    // Type of dice
     private int diceSize;
     private int currentPlayerIndex;
+    // Number of dice, each roll
     private int diceCount;
     private int roundsPlayed;
 
@@ -42,6 +45,7 @@ public class Game {
                 int totalScore = 0;
 
                 ArrayList<Integer> diceResults = rollDice(diceSize, numDiceToRoll);
+                // Show result of each dice
                 for (int i = 0; i < numDiceToRoll; i++) {
                     int diceResult = diceResults.get(i);
                     String diceLabel = (numDiceToRoll > 1) ? "Dice " + (i + 1) + ": " : "";
@@ -53,6 +57,7 @@ public class Game {
                 currentScore += totalScore;
                 playerScores.put(playerName, currentScore);
 
+                // Show current player's total score
                 System.out.println(playerName + " total points: " + currentScore);
                 System.out.println();
 
@@ -68,6 +73,7 @@ public class Game {
 
         System.out.println("Press 'Enter' to proceed.");
 
+        // Determine winner and show result
         String winner = determineWinner();
         sc.nextLine();
 
@@ -80,12 +86,14 @@ public class Game {
             System.out.println();
         }
 
+        // End message and prompt to exit
         System.out.println("Thank you for playing!");
         System.out.println("Press 'Enter' to exit the game.");
         sc.nextLine();
         sc.close();
     }
 
+    // Method for rolling dice and return result
     private ArrayList<Integer> rollDice(int dice, int numDice) {
         ArrayList<Integer> results = new ArrayList<>();
         Random random = new Random();
@@ -98,6 +106,7 @@ public class Game {
         return results;
     }
 
+    // Method to determine winner
     private String determineWinner() {
         String winner = null;
         int highestScore = Integer.MIN_VALUE;
