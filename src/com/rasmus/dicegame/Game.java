@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
+    private static String determineWinner;
     private ArrayList<Player> players;
     private HashMap<String, Integer> playerScores;
     private int diceSize;
