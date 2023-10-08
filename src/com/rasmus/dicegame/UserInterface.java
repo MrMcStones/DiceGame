@@ -19,7 +19,7 @@ public class UserInterface {
 
     // Method to read number of players
     public static int readPlayerCount() {
-        int playerCount = 0;
+        int playerCount;
 
         while (true) {
             try {
