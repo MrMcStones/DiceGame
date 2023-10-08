@@ -40,10 +40,12 @@ public class Game {
                 int numDiceToRoll = chosenDiceCount;
                 int totalScore = 0;
 
+                ArrayList<Integer> diceResults = rollDice(diceSize, numDiceToRoll);
                 for (int i = 0; i < numDiceToRoll; i++) {
-                    int diceResult = rollDice(diceSize);
+                    int diceResult = diceResults.get(i);
+                    String diceLabel = (numDiceToRoll > 1) ? "Dice " + (i + 1) + ": " : "";
+                    System.out.println(playerName + " rolled " + diceLabel + diceResult);
                     totalScore += diceResult;
-                    System.out.println("You rolled: " + diceResult);
                 }
 
                 int currentScore = playerScores.getOrDefault(playerName, 0);
@@ -83,10 +85,16 @@ public class Game {
         sc.close();
     }
 
-    private int rollDice(int dice) {
+    private ArrayList<Integer> rollDice(int dice, int numDice) {
+        ArrayList<Integer> results = new ArrayList<>();
         Random random = new Random();
-        int diceResult = random.nextInt(dice) + 1;
-        return diceResult;
+
+        for (int i = 0; i < numDice; i++) {
+            int diceResult = random.nextInt(dice) + 1;
+            results.add(diceResult);
+        }
+
+        return results;
     }
 
     private String determineWinner() {
