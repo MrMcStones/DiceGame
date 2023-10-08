@@ -14,11 +14,12 @@ public class UserInterface {
                 The game is simple - you will take turns rolling your dice, and whoever gets the highest score wins.
                 Please press 'enter' to continue.""");
         sc.nextLine();
+
     }
 
     // Method to read number of players
     public static int readPlayerCount() {
-        int playerCount;
+        int playerCount = 0;
 
         while (true) {
             try {

@@ -23,13 +23,6 @@ public class Main {
     }
 }
 
-// Checklist
-/*
-FIX
-Scanner into separate class
-Comment more?
- */
-
 // TODO
 /* TODO
 Amount of players - VG
