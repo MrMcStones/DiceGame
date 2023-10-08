@@ -21,6 +21,7 @@ Three relevant unit testings
  */
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -47,14 +48,19 @@ public class Main {
         int playerCount;
 
         while (true) {
-            System.out.println("Choose how many players there are. There can only be between" +
-                    " 2-5.");
-            playerCount = sc.nextInt();
+            try {
+                System.out.println("Choose how many players there are. There can only be between" +
+                        " 2-5.");
+                playerCount = sc.nextInt();
 
-            if (playerCount >= 2 && playerCount <= 5) {
-                break;
-            } else {
-                System.out.println("Please enter a valid option.");
+                if (playerCount >= 2 && playerCount <= 5) {
+                    break;
+                } else {
+                    System.out.println("Please enter a valid option.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid option.");
+                sc.nextLine();
             }
         }
 
@@ -65,9 +71,15 @@ public class Main {
         ArrayList<Player> players = new ArrayList<>();
 
         for (int i = 0; i < playerCount; i++) {
-            System.out.println("Player " + (i + 1) + ": Choose your name");
-            String playerName = sc.next();
-            players.add(new Player(playerName));
+            try {
+                System.out.println("Player " + (i + 1) + ": Choose your name");
+                String playerName = sc.next();
+                players.add(new Player(playerName));
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid option.");
+                sc.nextLine();
+                i--;
+            }
         }
 
         return players;
@@ -77,13 +89,18 @@ public class Main {
         int diceCount;
 
         while (true) {
-            System.out.println("How many dice do you want to play with? Must be between 1-4.");
-            diceCount = sc.nextInt();
+            try {
+                System.out.println("How many dice do you want to play with? Must be between 1-4.");
+                diceCount = sc.nextInt();
 
-            if (diceCount >= 1 && diceCount <= 4) {
-                break;
-            } else {
-                System.out.println("Please enter a valid option.");
+                if (diceCount >= 1 && diceCount <= 4) {
+                    break;
+                } else {
+                    System.out.println("Invalid input. Please enter a valid option.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid option.");
+                sc.nextLine();
             }
         }
 
@@ -94,13 +111,18 @@ public class Main {
         int diceSize;
 
         while (true) {
-            System.out.println("Choose which sided dice you want to use. The options are: 6, 12, or 20");
-            diceSize = sc.nextInt();
+            try {
+                System.out.println("Choose which sided dice you want to use. The options are: 6, 12, or 20");
+                diceSize = sc.nextInt();
 
-            if (diceSize == 6 || diceSize == 12 || diceSize == 20) {
-                break;
-            } else {
-                System.out.println("Please enter a valid option");
+                if (diceSize == 6 || diceSize == 12 || diceSize == 20) {
+                    break;
+                } else {
+                    System.out.println("Invalid input. Please enter a valid option.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid option.");
+                sc.nextLine();
             }
         }
 

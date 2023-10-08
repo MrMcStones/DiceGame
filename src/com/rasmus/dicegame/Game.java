@@ -63,7 +63,7 @@ public class Game {
             roundsPlayed++;
         }
 
-        System.out.println("Press 'Enter' to find proceed.");
+        System.out.println("Press 'Enter' to proceed.");
 
         String winner = determineWinner();
         sc.nextLine();
@@ -71,10 +71,15 @@ public class Game {
         if (winner != null) {
             System.out.println("The player named '" + winner +
                     "' won with a total of "+ playerScores.get(winner) + " points!");
+            System.out.println();
         } else {
             System.out.println("It's a draw!");
+            System.out.println();
         }
 
+        System.out.println("Thank you for playing!");
+        System.out.println("Press 'Enter' to exit the game.");
+        sc.nextLine();
         sc.close();
     }
 
