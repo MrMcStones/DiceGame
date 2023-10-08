@@ -21,23 +21,29 @@ Three relevant unit testings
  */
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
-
     public static void main(String[] args) {
-
         Scanner sc = new Scanner(System.in);
-        HashMap<String, Integer> playerScores = new HashMap<>();
-        int numDiceRolls = 3;
-
         System.out.println("""
                 Welcome to my DiceGame. You can play this game with 2-5 players and you can choose to use 1-4 dice during the game.
-                The game is simple - you will take turns rolling your dice and whoever get the highest score wins.
+                The game is simple - you will take turns rolling your dice, and whoever gets the highest score wins.
                 Please press 'enter' to continue.""");
         sc.nextLine();
 
+        int playerCount = readPlayerCount(sc);
+        ArrayList<Player> players = createPlayers(sc, playerCount);
+
+        int diceCount = readDiceCount(sc);
+
+        int diceSize = readDiceSize(sc);
+
+        Game game = new Game(players, diceCount, diceSize);
+        game.play();
+    }
+
+    private static int readPlayerCount(Scanner sc) {
         int playerCount;
 
         while (true) {
@@ -52,6 +58,10 @@ public class Main {
             }
         }
 
+        return playerCount;
+    }
+
+    private static ArrayList<Player> createPlayers(Scanner sc, int playerCount) {
         ArrayList<Player> players = new ArrayList<>();
 
         for (int i = 0; i < playerCount; i++) {
@@ -60,23 +70,31 @@ public class Main {
             players.add(new Player(playerName));
         }
 
-        int dice;
+        return players;
+    }
+
+    private static int readDiceCount(Scanner sc) {
+        int diceCount;
 
         while (true) {
             System.out.println("How many dice do you want to play with? Must be between 1-4.");
-            dice = sc.nextInt();
+            diceCount = sc.nextInt();
 
-            if (dice >= 1 && dice <= 4) {
+            if (diceCount >= 1 && diceCount <= 4) {
                 break;
             } else {
                 System.out.println("Please enter a valid option.");
             }
         }
 
+        return diceCount;
+    }
+
+    private static int readDiceSize(Scanner sc) {
         int diceSize;
 
         while (true) {
-            System.out.println("Choose which sided dice you want to use. The options are: 6, 12 or 20");
+            System.out.println("Choose which sided dice you want to use. The options are: 6, 12, or 20");
             diceSize = sc.nextInt();
 
             if (diceSize == 6 || diceSize == 12 || diceSize == 20) {
@@ -86,73 +104,8 @@ public class Main {
             }
         }
 
-        sc.nextLine();
-
-        int totalRolls = numDiceRolls * playerCount;
-        int rollCount = 0;
-        boolean isPlaying = true;
-        int currentPlayerIndex = 0;
-
-        ArrayList<Integer> diceRollResult = new ArrayList<>();
-        Dice gameDice = new Dice(diceSize);
-
-        while (isPlaying && rollCount < totalRolls) {
-            Player currentPlayer = players.get(currentPlayerIndex);
-            String playerName = currentPlayer.getName();
-
-            System.out.println(playerName + ", It's your turn to roll the dice. " +
-                    "Press 'Enter'");
-            sc.nextLine();
-
-            int diceResult = gameDice.roll();
-            int currentScore = playerScores.getOrDefault(playerName, 0);
-            currentScore += diceResult;
-            playerScores.put(playerName, currentScore);
-
-            System.out.println("You rolled: " + diceResult);
-            diceRollResult.add(diceResult);
-            System.out.println(playerName + " total points: " + currentScore);
-            System.out.println("Press 'Enter' to proceed.");
-
-            if (rollCount < totalRolls - 1) {
-                sc.nextLine();
-            }
-
-            rollCount++;
-
-            currentPlayerIndex++;
-
-            if (currentPlayerIndex >= playerCount) {
-                currentPlayerIndex = 0;
-            }
-
-            if (rollCount == totalRolls) {
-                isPlaying = false;
-            }
-        }
-
-        String winner = null;
-        int highestScore = Integer.MIN_VALUE;
-
-        for (Player player : players) {
-            int playerScore = playerScores.get(player.getName());
-            if (playerScore > highestScore) {
-                winner = player.getName();
-                highestScore = playerScore;
-            }
-        }
-
-        sc.nextLine();
-
-        if (winner != null) {
-            System.out.println("The player named '" + winner +
-                    "' won with a total of "+ highestScore + " points!");
-        } else {
-            System.out.println("It's a draw!");
-        }
-
+        return diceSize;
     }
-
 }
 
 // Checklist
@@ -177,4 +130,6 @@ Comment code
 Make use of classes (OOP) - Scanner, players, dice etc.
 UnitTesting
 Exception handling - Try Catch
+
+I detta spela vill jag att spelarna ska mötas av en introtext. De ska sedan få välja antalet spelare. Sedan skriva in sina namn. Sedan välja antalet tärningar som ska kastas varje omgång. Sedan välja vilken typ av tärning/tärningar som ska kastas. Sedan ska spelare ett får kasta antalet valda tärningar och resultatet för det kastet samt spelarens totala poäng ska visas upp. Sedan ska nästa spelare få kasta. Detta ska upprepas tre gånger. Sedan ska vinnaren räknas ut och visas upp innan spelet avslutas.
  */
